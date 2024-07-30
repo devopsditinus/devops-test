@@ -1,11 +1,18 @@
 FROM php:8.1.0-apache
 WORKDIR /app/backend
-COPY requirements.txt /app/backend
-RUN pip install -r requirements.txt
+
 
 # Mod Rewrite
 RUN a2enmod rewrite
-
+RUN libicu-dev \
+    libmariadb-dev \
+    unzip zip \
+    zlib1g-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
