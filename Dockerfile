@@ -4,7 +4,10 @@ WORKDIR /app/backend
 
 # Mod Rewrite
 RUN a2enmod rewrite
-RUN libicu-dev \
+
+# Linux Library
+RUN apt-get update -y \
+    libicu-dev \
     libmariadb-dev \
     unzip zip \
     zlib1g-dev \
