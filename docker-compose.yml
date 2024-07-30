@@ -1,10 +1,10 @@
 services:
 
   laravel-docker:
-    container_name: laravel_docker_tuts
+    container_name: laravel_devops_dtpl
     build: .
     volumes:
-      - ./dockerize_lara_app:/var/www/html
+      - ./devops-test:/var/www/html
     ports:
       - 8090:80
   
@@ -12,7 +12,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: dockerize_db
+      MYSQL_DATABASE: jenkins_laravel
     ports:
     - 3306:3306
   
