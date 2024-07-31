@@ -1,0 +1,7 @@
+ou can now connect to this MySQL Server with KDQ3UN8xeSGQ
+
+    mysql -uadmin -pKDQ3UN8xeSGQ -h<host> -P<port>
+
+Please remember to change the above password as soon as possible!
+MySQL user 'root' has no password but only allows local connections
+
