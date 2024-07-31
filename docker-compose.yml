@@ -17,7 +17,7 @@ services:
     - 3306:3306
     
   web :
-     image : ditinusdevops/devops-test:test2
+     image : ditinusdevops/devops-test-1:tagname:test2
      ports :
          - "8083:80"
   # phpmyadmin:
