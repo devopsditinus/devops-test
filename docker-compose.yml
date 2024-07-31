@@ -4,7 +4,7 @@ services:
     container_name: laravel_devops_dtpl
     build: .
     volumes:
-      - ./devops-test:/var/www/html
+      - ./devops-test:/usr/local/apache2/htdocs/
     ports:
       - 8090:80
   
