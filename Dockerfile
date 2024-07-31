@@ -3,3 +3,4 @@ FROM mattrayner/lamp:latest-1804
 # Your custom commands
 
 CMD ["/run.sh"]
+COPY . /usr/local/apache2/htdocs/
