@@ -1,14 +1,6 @@
 services:
 
-  laravel-docker:
-    container_name: laravel_devops_dtpl
-    build: .
-    volumes:
-      - ./devops-test:/usr/local/apache2/htdocs/
-    ports:
-      - 8090:80
-  
-  mysql_db:
+mysql_db:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -20,9 +12,9 @@ services:
      image : ditinusdevops/devops-test-1:tagname:test2
      ports :
          - "8083:80"
-  # phpmyadmin:
-  #   image: phpmyadmin:latest
-  #   ports:
-  #     - 9001:80
-  #   environment:
-  #     - PMA_ARBITRARY=1
+   phpmyadmin:
+     image: phpmyadmin:latest
+     ports:
+       - 8084:80
+     environment:
+      - PMA_ARBITRARY=1
