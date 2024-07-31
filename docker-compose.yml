@@ -15,7 +15,11 @@ services:
       MYSQL_DATABASE: jenkins_laravel
     ports:
     - 3306:3306
-  
+    
+  web :
+     image : ditinusdevops/devops-test:test2
+     ports :
+         - "8083:80"
   # phpmyadmin:
   #   image: phpmyadmin:latest
   #   ports:
