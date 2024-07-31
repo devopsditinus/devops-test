@@ -1,20 +1,21 @@
+version: "3.3"
 services:
-
-mysql_db:
+  web :
+    build: .
+    ports:
+      - "8083:80"
+  
+  mysql_db:
     image: mysql:8.0
-    environment:
+      environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: jenkins_laravel
-    ports:
-    - 3306:3306
+     ports:
+      - "3306:3306"
     
-  web :
-     image : ditinusdevops/devops-test-1:tagname:test2
-     ports :
-         - "8083:80"
-   phpmyadmin:
+  phpmyadmin:
      image: phpmyadmin:latest
      ports:
-       - 8084:80
+       - "9001:80"
      environment:
-      - PMA_ARBITRARY=1
+       - PMA_ARBITRARY=1
