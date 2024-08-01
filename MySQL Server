@@ -1,7 +1,17 @@
 ou can now connect to this MySQL Server with KDQ3UN8xeSGQ
 
+4I11LPS8MY36
+
     mysql -uadmin -pKDQ3UN8xeSGQ -h<host> -P<port>
 
 Please remember to change the above password as soon as possible!
 MySQL user 'root' has no password but only allows local connections
+You can now connect to this MySQL Server with 4I11LPS8MY36
+
+    mysql -uadmin -p4I11LPS8MY36 -h<host> -P<port>
+
+Please remember to change the above password as soon as possible!
+MySQL user 'root' has no password but only allows local connections
+
+enjoy!
 
