@@ -7,7 +7,6 @@ services:
             - "8083:80"
         volumes:
             - ./devops-test:/var/www/html/
-            - ./log:/var/log/apache2
     mysql:
         image: mysql:8.0
         restart: always
@@ -21,8 +20,6 @@ services:
             - MYSQL_ROOT_PASSWORD=
         volumes:
             - ./dump:/docker-entrypoint-initdb.d
-            - ./conf:/etc/mysql/conf.d
-            - persistent:/var/lib/mysql
     phpmyadmin:
         image: phpmyadmin
         restart: always
