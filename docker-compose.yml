@@ -17,8 +17,8 @@ services:
         environment:
             MYSQL_DATABASE: myDb
             MYSQL_USER: root
-            MYSQL_PASSWORD: 
-            MYSQL_ROOT_PASSWORD: 
+            MYSQL_PASSWORD:
+            MYSQL_ROOT_PASSWORD:
         volumes:
             - ./dump:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
@@ -31,8 +31,8 @@ services:
         ports:
             - 8084:80
         environment:
-            MYSQL_USER: user
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test
+            MYSQL_USER: root
+            MYSQL_PASSWORD:
+            MYSQL_ROOT_PASSWORD:
 volumes:
     persistent:
