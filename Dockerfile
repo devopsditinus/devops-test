@@ -1,12 +1,12 @@
 FROM php:8.1-apache 
 RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN apt-get update
-&& apt-get install -y libzip-dev
-&& apt-get install -y zlib1g-dev
-&& apt-get install -y iputils-ping
-&& apt-get install -y mycli
-&& rm -rf /var/lib/apt/lists/*
+RUN sudo yum update
+&& sudo yum install -y libzip-dev
+&& sudo yum install -y zlib1g-dev
+&& sudo yum install -y iputils-ping
+&& sudo yum install -y mycli
+&& sudo yum /var/lib/apt/lists/*
 && docker-php-ext-install zip
 && docker-php-ext-install mysqli
 && docker-php-ext-enable mysqli
