@@ -4,4 +4,4 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli
 RUN a2enmod rewrite
 RUN a2enmod ssl
 RUN service apache2 restart
-COPY . /usr/local/apache2/htdocs/
+COPY . /var/www/html/
