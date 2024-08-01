@@ -6,7 +6,7 @@ services:
         ports:
             - "8083:80"
         volumes:
-            - :/var/www/html
+            - ./devops-test:/var/www/html/
             - ./log:/var/log/apache2
     mysql:
         image: mysql:8.0
