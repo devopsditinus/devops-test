@@ -1,41 +1,34 @@
-version: "3.3"
+version: "3.6"
 services:
-    www:
+    php:
         build: .
-        container_name: webhost
-        ports: 
+        restart: always
+        ports:
             - "8083:80"
         volumes:
-            - ./devops-test:/var/www/html/
-        links:
-            - db
-        networks:
-            - default
-    db:
-        image: mysql:8.0.16
-        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+            - :/var/www/html
+            - ./log:/var/log/apache2
+    mysql:
+        image: mysql:8.0
+        restart: always
         ports:
-            - "3306:3306"  
+            - "3306:3306"
+        command: --default-authentication-plugin=mysql_native_password
         environment:
-            MYSQL_DATABASE: myDb
-            MYSQL_USER: root
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test
+            - MYSQL_DATABASE=myDb
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=
+            - MYSQL_ROOT_PASSWORD=
         volumes:
             - ./dump:/docker-entrypoint-initdb.d
+            - ./conf:/etc/mysql/conf.d
             - persistent:/var/lib/mysql
-        networks:
-            - default
     phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: PHP_MySQL
-        links: 
-            - db:db
+        image: phpmyadmin
+        restart: always
         ports:
             - 8084:80
         environment:
-            MYSQL_USER: root
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test
+            - PMA_HOST=mysql
 volumes:
     persistent:
