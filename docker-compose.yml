@@ -6,7 +6,7 @@ services:
         ports:
             - "8083:80"
         volumes:
-            - ./devops-test:/var/www/html/
+            - ./devops-test:/usr/local/apache2/htdocs/
     mysql:
         image: mysql:8.0
         restart: always
