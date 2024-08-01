@@ -1,8 +1,7 @@
-FROM php:7.1.2-apache 
+FROM php:8.1-apache 
 RUN a2enmod rewrite
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN apt-get update
-&& apt-get upgrade -y
 && apt-get install -y libzip-dev
 && apt-get install -y zlib1g-dev
 && apt-get install -y iputils-ping
@@ -11,3 +10,5 @@ RUN apt-get update
 && docker-php-ext-install zip
 && docker-php-ext-install mysqli
 && docker-php-ext-enable mysqli
+
+COPY . /var/www/html
