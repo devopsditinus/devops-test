@@ -1,7 +1,38 @@
 version: "3.3"
 services:
-  web :
-    build: .
-    image : ditinusdevops/devops-test:test2
-    ports:
-      - "8083:80"
+    www:
+        build: .
+        ports: 
+            - "8083:80"
+        volumes:
+            - ./devops-test:/var/www/html/
+        links:
+            - db
+        networks:
+            - default
+    db:
+        image: mysql
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: myDb
+            MYSQL_USER: root
+            MYSQL_PASSWORD: 
+            MYSQL_ROOT_PASSWORD: 
+        volumes:
+            - ./dump:/docker-entrypoint-initdb.d
+            - persistent:/var/lib/mysql
+        networks:
+            - default
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links: 
+            - db:db
+        ports:
+            - 8084:80
+        environment:
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+volumes:
+    persistent:
