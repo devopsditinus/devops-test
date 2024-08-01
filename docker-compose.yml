@@ -12,12 +12,10 @@ services:
         networks:
             - default
     db:
-        image: mysql:8.0
-        restart: always
-        container_name: DataBaseServer
-        ports: 
-            - "3306:3306"
-        command: mysqld --default-authentication-plugin=mysql_native_password    
+        image: mysql:8.0.16
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+        ports:
+            - "3306:3306"  
         environment:
             MYSQL_DATABASE: myDb
             MYSQL_USER: root
