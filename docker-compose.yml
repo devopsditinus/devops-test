@@ -12,6 +12,25 @@ services:
     networks:
       - app-network
 
+    depends_on:
+      - db
+    environment:
+      DB_DATABASE: jenkins_laravel
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: jenkins_laravel
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ""
+    volumes:
+      - mysql_data:/var/lib/mysql
+
 networks:
   app-network:
     driver: bridge
