@@ -38,7 +38,8 @@ RUN chown -R www-data:www-data /var/www/html
 # Set permissions for Laravel
 RUN chown -R apache:apache /var/www/html && \
     chmod -R 755 /var/www/html/storage 
-
+    chmod -R 775 /var/www/html/storage && \
+    chmod -R 775 /var/www/html/bootstrap/cache
 # Copy Apache configuration
 COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
 
