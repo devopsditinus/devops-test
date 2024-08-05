@@ -5,7 +5,7 @@ ENV PHP_VERSION=8.0
 ENV COMPOSER_VERSION=2.1.9
 
 # Update the system and install necessary packages
-RUN RUN apk update && apk add --no-cache \
+RUN apk update && apk add --no-cache \
     php \
     php-cli \
     php-fpm \
