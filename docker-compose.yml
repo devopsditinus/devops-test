@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/var/www/html
     ports:
-      - "9000:80"  # Expose Apache on port 9000
+      - "8083:80"  # Expose Apache on port 9000
     networks:
       - app-network
 
