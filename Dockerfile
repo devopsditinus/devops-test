@@ -11,29 +11,6 @@ RUN apt-get update && \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
-    php-cli \
-    php-fpm \
-    php-json \
-    php-common \
-    php-mysqlnd \
-    php-xml \
-    php-mbstring \
-    php-zip \
-    php-pdo \
-    php-bcmath \
-    php-tokenizer \
-    php-ctype \
-    php-fileinfo \
-    php-openssl \
-    php-gd \
-    php-curl \
-    php-intl \
-    php-xmlwriter \
-    php-xmlreader \
-    php-simplexml \
-    php-phar \
-    php-iconv \
-    curl \
     locales \
     zip \
     git \
