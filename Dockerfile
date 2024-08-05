@@ -8,7 +8,6 @@ ENV COMPOSER_VERSION=2.1.9
 RUN dnf -y update && \
     dnf -y install epel-release && \
     dnf -y install \
-    httpd \
     php \
     php-cli \
     php-fpm \
