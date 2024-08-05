@@ -23,6 +23,9 @@ RUN apt-get update && \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Copy Apache configuration
+COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
+
 # Copy application files
 COPY . /var/www/html
 
@@ -33,15 +36,7 @@ RUN chown -R www-data:www-data /var/www/html
 # RUN composer update --no-dev --optimize-autoloader
 
 # Install PHP dependencies using Composer
- RUN composer install --no-dev --optimize-autoloader
- 
-# Set permissions for Laravel
-RUN chown -R apache:apache /var/www/html && \
-    chmod -R 755 /var/www/html/storage 
-    chmod -R 775 /var/www/html/storage && \
-    chmod -R 775 /var/www/html/bootstrap/cache
-# Copy Apache configuration
-COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
+# RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 80 for HTTP
 EXPOSE 80
