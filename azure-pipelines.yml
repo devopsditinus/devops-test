@@ -1,0 +1,31 @@
+trigger:
+- main
+
+pool:
+  name: 'laravel-demo'  # Your agent name
+
+variables:
+  dockerHubRepository: 'ditinusdevops/project_1'
+  dockerImageTag: 'latest'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Demo1'  # Service connection name
+    repository: $(dockerHubRepository)
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+    tags: $(dockerImageTag)
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Demo1'  # Service connection name
+    repository: $(dockerHubRepository)
+    command: 'push'
+    tags: $(dockerImageTag)
+
+- script: |
+    docker-compose pull
+    docker-compose up -d
+  displayName: 'Run Docker Compose Locally'
+  workingDirectory: '$(System.DefaultWorkingDirectory)'
