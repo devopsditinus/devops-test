@@ -5,9 +5,7 @@ ENV PHP_VERSION=8.0
 ENV COMPOSER_VERSION=2.1.9
 
 # Update the system and install necessary packages
-RUN yum -y update && \
-    yum -y install epel-release && \
-    yum -y install \
+RUN RUN apk update && apk add --no-cache \
     php \
     php-cli \
     php-fpm \
