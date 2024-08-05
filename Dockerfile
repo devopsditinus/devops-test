@@ -5,9 +5,9 @@ ENV PHP_VERSION=8.0
 ENV COMPOSER_VERSION=2.1.9
 
 # Update the system and install necessary packages
-RUN dnf -y update && \
-    dnf -y install epel-release && \
-    dnf -y install \
+RUN yum -y update && \
+    yum -y install epel-release && \
+    yum -y install \
     php \
     php-cli \
     php-fpm \
