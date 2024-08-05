@@ -5,7 +5,7 @@ ENV PHP_VERSION=8.0
 ENV COMPOSER_VERSION=2.1.9
 USER root
 # Update the system and install necessary packages
-RUN microdnf install yum update && microdnf install yum add --no-cache \
+RUN yum update && yum add --no-cache \
     php \
     php-cli \
     php-fpm \
