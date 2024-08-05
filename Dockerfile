@@ -1,5 +1,4 @@
-# Use CentOS 9 as the base image
-FROM centos:9
+FROM httpd:2.4
 
 # Set environment variables
 ENV PHP_VERSION=8.0
