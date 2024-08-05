@@ -36,7 +36,7 @@ RUN chown -R www-data:www-data /var/www/html
 # RUN composer update --no-dev --optimize-autoloader
 
 # Install PHP dependencies using Composer
-RUN composer install --no-dev --optimize-autoloader
+# RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 80 for HTTP
 EXPOSE 80
