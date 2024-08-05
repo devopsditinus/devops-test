@@ -7,11 +7,10 @@ WORKDIR /var/www/html
 # Install system dependencies and PHP extensions
 RUN apt-get update && \
     apt-get install -y \
-	build-essential \
+    build-essential \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
-    locales \
     php-cli \
     php-fpm \
     php-json \
@@ -35,9 +34,10 @@ RUN apt-get update && \
     php-phar \
     php-iconv \
     curl \
+    locales \
+    zip \
     git \
-    unzip\
-	libonig-dev \
+    libonig-dev \
     libzip-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd pdo_mysql mbstring zip exif pcntl && \
@@ -46,24 +46,23 @@ RUN apt-get update && \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set working directory
-WORKDIR /var/www/html
+# Copy Apache configuration
+COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy Laravel application files
-COPY . .
+# Copy application files
+COPY . /var/www/html
+
+# Set appropriate permissions
+RUN chown -R www-data:www-data /var/www/html
+
+# Update Composer dependencies
+# RUN composer update --no-dev --optimize-autoloader
 
 # Install PHP dependencies using Composer
-RUN composer install --no-dev --optimize-autoloader
+# RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions for Laravel
-RUN chown -R apache:apache /var/www/html && \
-    chmod -R 755 /var/www/html/storage
-
-# Copy Apache configuration file
-COPY ./docker/apache/000-default.conf /etc/httpd/conf.d/000-default.conf
-
-# Expose port 80
+# Expose port 80 for HTTP
 EXPOSE 80
 
-# Start Apache
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+# Start Apache in the foreground
+CMD ["apache2-foreground"]
