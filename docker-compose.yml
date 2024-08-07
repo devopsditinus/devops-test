@@ -7,7 +7,7 @@ services:
     volumes:
       - .:/var/www/html
     ports:
-      - "8084:80"  # Map Apache to port 8081 to avoid conflict with Jenkins
+      - "8083:80"  # Map Apache to port 8081 to avoid conflict with Jenkins
     depends_on:
       - db
     environment:
