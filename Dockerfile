@@ -23,20 +23,25 @@ RUN apt-get update && \
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
 # Copy Apache configuration
 COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy application files
 COPY . /var/www/html
 
-# Set appropriate permissions
-RUN chown -R www-data:www-data /var/www/html
+# Set the correct permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html/storage \
+    && chmod -R 755 /var/www/html/bootstrap/cache
 
 # Update Composer dependencies
-# RUN composer update --no-dev --optimize-autoloader
+ RUN composer update --no-dev --optimize-autoloader
 
 # Install PHP dependencies using Composer
-# RUN composer install --no-dev --optimize-autoloader
+ RUN composer install --no-dev --optimize-autoloader
 
 # Expose port 80 for HTTP
 EXPOSE 80
