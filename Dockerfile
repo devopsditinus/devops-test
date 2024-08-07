@@ -1,43 +1,45 @@
-# Use the official PHP image with Apache
+# Use PHP 8.1 with Apache
 FROM php:8.1-apache
 
-# Set the working directory
+# Set working directory
 WORKDIR /var/www/html
 
-# Install necessary PHP extensions and Composer
-RUN apt-get update && apt-get install -y \
+# Install system dependencies and PHP extensions
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
     libpng-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
-    libonig-dev \
-    libzip-dev \
+    locales \
     zip \
-    unzip \
     git \
-    curl \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    libonig-dev \
+    libzip-dev && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd pdo_mysql mbstring zip exif pcntl && \
+    rm -rf /var/lib/apt/lists/*
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copy the Laravel project files to the container
+# Copy Apache configuration
+COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Copy application files
 COPY . /var/www/html
 
-# Copy the Apache vhost configuration
-COPY ./docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+# Set appropriate permissions
+RUN chown -R www-data:www-data /var/www/html
 
-# Set the correct permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+# Update Composer dependencies
+# RUN composer update --no-dev --optimize-autoloader
 
-# Install Laravel dependencies
-RUN composer install --no-interaction
+# Install PHP dependencies using Composer
+# RUN composer install --no-dev --optimize-autoloader
 
-# Expose port 80
+# Expose port 80 for HTTP
 EXPOSE 80
 
-# Start Apache server
+# Start Apache in the foreground
 CMD ["apache2-foreground"]
