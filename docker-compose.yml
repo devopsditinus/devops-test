@@ -8,13 +8,6 @@ services:
       - .:/var/www/html
     ports:
       - "8083:80"  # Map Apache to port 8081 to avoid conflict with Jenkins
-    depends_on:
-      - db
-    environment:
-      DB_DATABASE: jenkins_laravel
-      DB_USERNAME: root
-      DB_PASSWORD: 
-
-
+  
 volumes:
   mysql_data:
