@@ -5,7 +5,7 @@ pipeline {
         stage("Clone Code"){
             steps{
                 echo "Cloning the Code"
-                git url:"https://github.com/devopsditinus/devops-test.git", branch: "main"
+                git url:"https://github.com/devopsditinus/devops-test.git", branch: "dev"
             }
         }
         stage("Build"){
