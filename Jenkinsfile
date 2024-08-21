@@ -27,7 +27,8 @@ pipeline {
         stage("Deploy"){
             steps{
                 echo "Deploying the Container"
-                sh "docker-compose down && docker-compose up -d"
+                sh "docker-compose down && docker-compose up -d --remove-orphans"
+                
             }
         }
     }
