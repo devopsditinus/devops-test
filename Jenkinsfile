@@ -11,16 +11,16 @@ pipeline {
         stage("Build"){
             steps{
                 echo "Building the image"
-                  sh "docker build . -t devops-test"
+                  sh "docker build . -t devops-dev"
             }
         }
         stage("Push to Docker Hub"){
             steps{
                 echo "Pushing the image to Docker hub"
                withCredentials([usernamePassword(credentialsId:"dockerHUB",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag devops-test ${env.dockerHubUser}/devops-test:test2"
+                sh "docker tag devops-dev ${env.dockerHubUser}/devops-dev:test2"
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/devops-test:test2"
+                sh "docker push ${env.dockerHubUser}/devops-dev:test2"
                 }
             }
         }  
