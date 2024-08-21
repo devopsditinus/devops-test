@@ -5,7 +5,7 @@ pipeline {
         stage("Clone Code"){
             steps{
                 echo "Cloning the Code"
-                git url:"https://github.com/devopsditinus/devops-test.git", branch: "dev"
+                git url:"https://github.com/devopsditinus/devops-test.git", branch: "main"
             }
         }
         stage("Build"){
@@ -27,7 +27,7 @@ pipeline {
         stage("Deploy"){
             steps{
                 echo "Deploying the Container"
-                sh "docker-compose down && docker-compose up -d --remove-orphans"
+                sh "docker-compose down && docker-compose up -d"
                 
             }
         }
